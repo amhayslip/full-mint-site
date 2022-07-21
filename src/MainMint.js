@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { ethers, BigNumber } from 'ethers';
 import roboPunksNFT from './RoboPunksNFT.json';
 
-const roboPunksNFTAddress = "0x2bF90F2c25045e35611936b28Cb6C384A18A4995";
+const roboPunksNFTAddress = "0x959B5d97773Ac3d44973D265F18b1654E4896337";
 
 const MainMint = ({ accounts, setAccounts }) => {
   const [mintAmount, setMintAmount] = useState(1);
@@ -20,7 +20,8 @@ const MainMint = ({ accounts, setAccounts }) => {
       );
       try {
         const response = await contract.mint(BigNumber.from(mintAmount),  {
-          value: ethers.utils.parseEther((0.002 * mintAmount).toString())
+          value: ethers.utils.parseEther((0.01 * mintAmount).toString()),
+          gasLimit: 50000, 
         });
         console.log('response: ', response);
       } catch (err) {

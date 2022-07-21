@@ -15,7 +15,7 @@ contract RoboPunksNFT is ERC721, Ownable {
   mapping(address => uint256) public walletMints;
 
   constructor() payable ERC721('RoboPunks', 'RP') {
-    mintPrice = 0.2 ether;
+    mintPrice = 0.01 ether;
     totalSupply =  0;
     maxSupply = 1000;
     maxPerWallet = 3;
@@ -42,7 +42,7 @@ contract RoboPunksNFT is ERC721, Ownable {
 
   function mint(uint256 quantity_) public payable {
     require(isPublicMintEnabled, 'minting not enabled');
-    require(msg.value == quantity_ * mintPrice, 'wrong mint value');
+    require(msg.value >= quantity_ * mintPrice, 'wrong mint value');
     require(totalSupply + quantity_ <= maxSupply, 'sold out');
     require(walletMints[msg.sender] + quantity_ <= maxPerWallet, 'exceed max wallet');
 
